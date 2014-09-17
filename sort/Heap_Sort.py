@@ -21,11 +21,13 @@ class Heap:
         "求右子节点索引"
         return 2 * index + 1
 
-    def max_heapify(self, index, n=len(self.heap)):
+    def max_heapify(self, index, n=None):
         """维护最大堆特性。
         
-        对于以 index 为顶点的子堆，假定其左子堆和右子堆满足最大堆特性，本方
+        对于以 index 为顶点、到第 n 个节点的子堆，假定其左子堆和右子堆满足最大堆特性，本方
         法使它自己也满足最大堆特性。"""
+        if n is None:
+            n =len(self.heap)
         l = self.left_child(index)
         r = self.right_child(index)
         max = index
@@ -37,7 +39,7 @@ class Heap:
             tmp = self.heap[index-1]   # 交换 self.heap[index-1] 和 self.heap[max-1]
             self.heap[index-1] = self.heap[max-1]
             self.heap[max-1] = tmp
-            self.max_heapify(max)  # 令 self.heap[index-1] 逐层下沉，直至其较大为止
+            self.max_heapify(max, n)  # 令 self.heap[index-1] 逐层下沉，直至其较大为止
 
     def build_max_heap(self):
         "构建最大堆"
@@ -52,7 +54,7 @@ def heap_sort(A):
         tmp = h.heap[i-1]
         h.heap[i-1] = h.heap[0]
         h.heap[0] = tmp
-        h.max_heapify(1, i)
+        h.max_heapify(1, i-1)
 
 A = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
 print("原来的序列为：{0}".format(A))
