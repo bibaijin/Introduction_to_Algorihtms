@@ -21,7 +21,7 @@ def partition(A, p, r):
     A[i+1], A[r-1] = A[r-1], A[i+1]
     return i + 1
 
-A = [2, 8, 7, 1, 3, 5, 6, 4]
+A = [2, 8, 7, 9, 1, 3, 100, 5, 6, 4]
 print("原来的序列为：{}".format(A))
 quick_sort(A, 0, len(A))
 print("排序后的序列为：{}".format(A))
